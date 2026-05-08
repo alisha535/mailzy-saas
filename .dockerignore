@@ -1,0 +1,55 @@
+# ── Docker Build Ignore ────────────────────────────────────────
+# These files/folders are NOT sent to Docker build context
+# Keeps image small and prevents secrets leaking into image
+
+# Dependencies (reinstalled in Docker)
+node_modules/
+
+# Previous builds
+dist/
+
+# Environment files — NEVER include in image
+.env
+.env.local
+.env.production
+.env.*.local
+.env.docker
+
+# Git files
+.git/
+.github/
+.gitignore
+
+# Dev tools
+.vscode/
+*.log
+npm-debug.log*
+
+# Test files
+*.test.*
+*.spec.*
+coverage/
+playwright-report/
+test-results/
+
+# Docs and misc
+README.md
+DEPLOYMENT_GUIDE.md
+STANDALONE.html
+refactor.mjs
+*.md
+
+# Docker files themselves (no recursion)
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Supabase local dev
+supabase/.temp/
+
+# Bad directory from previous build
+{src/

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Mailzy SaaS — Standalone (No Install)</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3/src/css/index.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet"/>
+  <style>
+    html,body,#root{height:100%;margin:0;background:#07070f;}
+    ::-webkit-scrollbar{width:4px;height:4px}
+    ::-webkit-scrollbar-track{background:transparent}
+    ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:4px}
+    select option{background:#0f0f1a;color:white}
+    .ag-live{cursor:grab!important;user-select:none!important}
+    .ag-live:active,.ag-grabbed{cursor:grabbing!important;box-shadow:0 20px 60px rgba(59,130,246,0.35)!important}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    // ── PASTE YOUR instantly-saas-complete.jsx CONTENT HERE ──
+    // The file is too large for inline HTML. Use the React app version instead.
+    // Run: npm install && npm run dev
+    
+    function App() {
+      return React.createElement('div', {
+        style: {
+          minHeight: '100vh',
+          background: '#07070f',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontFamily: "'DM Sans', system-ui, sans-serif",
+          flexDirection: 'column',
+          gap: '24px',
+          padding: '40px'
+        }
+      }, [
+        React.createElement('div', {
+          key: 'logo',
+          style: { width: 64, height: 64, borderRadius: 16, background: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 0 40px rgba(59,130,246,0.4)' }
+        }, React.createElement('span', { style: { color: 'white', fontSize: 28 } }, '⚡')),
+        React.createElement('h1', { key: 'title', style: { color: 'white', fontSize: 32, fontWeight: 900, margin: 0 } }, 'Mailzy SaaS'),
+        React.createElement('p', { key: 'sub', style: { color: '#64748b', fontSize: 16, margin: 0, textAlign: 'center', maxWidth: 480 } }, 'To run the full app, use the React version:'),
+        React.createElement('div', {
+          key: 'code',
+          style: { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12, padding: '20px 32px', fontFamily: 'monospace', color: '#60a5fa', fontSize: 14, lineHeight: 2 }
+        }, [
+          React.createElement('div', { key: '1' }, '$ npm install'),
+          React.createElement('div', { key: '2' }, '$ npm run dev'),
+          React.createElement('div', { key: '3', style: { color: '#10b981' } }, '→ http://localhost:3000'),
+        ]),
+        React.createElement('p', { key: 'note', style: { color: '#334155', fontSize: 13, margin: 0, textAlign: 'center' } }, 'Or open instantly-saas-complete.jsx in any React artifact (Claude, CodeSandbox, StackBlitz)')
+      ])
+    }
+    
+    ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App))
+  </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+# ══════════════════════════════════════════════════════════════
+# Mailzy — Docker Compose
+# One command: docker compose up -d
+# ══════════════════════════════════════════════════════════════
+
+version: "3.9"
+
+services:
+  mailzy:
+    # ── Build from local Dockerfile ──────────────────────────
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # These are injected at BUILD time into the React bundle
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+
+    # ── Container name ───────────────────────────────────────
+    container_name: mailzy-app
+
+    # ── Port mapping: host:container ─────────────────────────
+    # Access at: http://localhost:8080
+    ports:
+      - "8080:80"
+
+    # ── Health check ─────────────────────────────────────────
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+    # ── Restart policy ────────────────────────────────────────
+    restart: unless-stopped
+
+    # ── Resource limits (prevents runaway container) ──────────
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+        reservations:
+          cpus: "0.1"
+          memory: 64M
+
+    # ── Logging ───────────────────────────────────────────────
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+    # ── Labels ────────────────────────────────────────────────
+    labels:
+      - "app=mailzy"
+      - "version=3.0.0"
+
+  # ── Optional: Nginx proxy for multiple domains ───────────────
+  # Uncomment below if deploying multiple apps on same server
+  # nginx-proxy:
+  #   image: nginxproxy/nginx-proxy:alpine
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+
+# ── Named volumes (none needed — Nginx serves static files) ───
+# volumes: {}
