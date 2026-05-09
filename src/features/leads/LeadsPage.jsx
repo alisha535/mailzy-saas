@@ -4,7 +4,7 @@ import Papa from 'papaparse'
 import { Card, Btn, Ic, ICONS, StatusBadge, Spinner } from '../../components/ui'
 
 export default function LeadsPage() {
-  const { leads, loading, load, bulkImport, total } = useLeads()
+  const { leads = [], loading, load, bulkImport, total = 0 } = useLeads()
   const fileInputRef = useRef(null)
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function LeadsPage() {
           <input
             type="text"
             placeholder="Search leads by name, email or company..."
-            className="w-full bg-white border border-black/10 rounded-2xl py-4 pl-12 pr-4 text-[15px] font-bold text-[#1D1D1F] placeholder-[#86868B] focus:outline-none focus:ring-4 focus:ring-[#0066CC]/10 focus:border-[#0066CC]/30 transition-all shadow-sm"
+            className="w-full bg-white border border-black/10 rounded-2xl py-4 pl-12 pr-4 text-[15px] font-bold text-[#1D1D1F] placeholder-[#86868B] focus:outline-none focus:ring-4 focus:ring-[#0066CC]/20"
             onChange={(e) => load({ search: e.target.value })}
           />
         </div>
@@ -103,8 +103,8 @@ export default function LeadsPage() {
                   <tr key={lead.id} className="hover:bg-[#F5F5F7]/40 transition-all group">
                     <td className="px-8 py-6">
                       <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0066CC] to-[#004a99] text-white flex items-center justify-center font-black text-sm uppercase shadow-lg shadow-blue-500/20">
-                          {lead.first_name?.[0] || lead.email[0]}
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0066CC] to-[#004a99] text-white flex items-center justify-center font-black text-sm uppercase shadow-lg">
+                          {lead.first_name?.[0] || lead.email?.[0] || '?'}
                         </div>
                         <div>
                           <p className="text-[#1D1D1F] text-base font-black tracking-tight">{lead.first_name} {lead.last_name}</p>
