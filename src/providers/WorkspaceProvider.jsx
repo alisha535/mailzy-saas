@@ -32,14 +32,18 @@ export function WorkspaceProvider({ children }) {
       setWorkspace(active)
     } catch (e) {
       console.error('[Workspace] Load failed:', e)
+      setWorkspace(null)
+      setWorkspaces([])
     } finally {
       setLoading(false)
     }
   }
 
   function switchWorkspace(ws) {
-    setWorkspace(ws)
-    localStorage.setItem('mailzy_workspace', ws.id)
+    if (ws) {
+      setWorkspace(ws)
+      localStorage.setItem('mailzy_workspace', ws.id)
+    }
   }
 
   return (
